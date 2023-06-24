@@ -65,7 +65,7 @@ def write_papers_to_readme():
                 username = parts[3]
                 repo_name = parts[4]
             show_stars = "![GitHub Repo stars](https://badgen.net/github/stars/{}/{})".format(username,repo_name)
-            f.write(f"| {paper['title']} | [Link]]({paper['home_page']}) | [Github]({paper['code']}) | {show_stars}|\n")
+            f.write(f"| {paper['title']} | [Link]({paper['home_page']}) | [Github]({paper['code']}) | {show_stars}|\n")
 
     print('Converted enriched paper information to CVPR2023.md.')
 
