@@ -3,7 +3,7 @@ import json
 import os
 
 github_api = 'https://api.github.com/repos'
-github_token = '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'  # Replace with your GitHub token
+github_token = ''  # Replace with your GitHub token
 
 def enrich_papers_info():
     # Load the paper list from the JSON file
@@ -18,7 +18,7 @@ def enrich_papers_info():
 
         stars = 0  # Initialize star count
 
-        if 'github.com' in link:
+        if 'https://github.com/' in link:
             parts = link.split('/')
             if len(parts) > 4:  # Ensure the link points to a specific repository
                 username = parts[3]
@@ -69,7 +69,7 @@ def write_papers_to_readme():
 
     print('Converted enriched paper information to CVPR2023.md.')
 
-override = True
+override = False
 if override or not os.path.exists('papers_with_code_and_stars.json') :
     enrich_papers_info()
 
