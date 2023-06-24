@@ -7,7 +7,7 @@ github_token = ''  # Replace with your GitHub token
 
 def enrich_papers_info():
     # Load the paper list from the JSON file
-    with open('papers_info.json', 'r') as f:
+    with open('CVPR2023/papers_info.json', 'r') as f:
         paper_list = json.load(f)
 
     paper_with_code_list = []

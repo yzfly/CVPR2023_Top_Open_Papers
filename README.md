@@ -1,4 +1,4 @@
-# Top CVPR2023 Open Papers
+# CVPR2023 Top Open Papers
 
 The CVPR2023 paper information is extracted from the following web page and saved in the `papers_info.json` file.
 
