@@ -7,11 +7,11 @@ github_token = ''  # Replace with your GitHub token
 
 def enrich_papers_info():
     # Load the paper list from the JSON file
-    with open('CVPR2023/papers_info.json', 'r') as f:
+    with open('CVPR2023/papers_info_refined.json', 'r') as f:
         paper_list = json.load(f)
 
     paper_with_code_list = []
-    for paper in paper_list:
+    for _, paper in paper_list.items():
         link = paper['code']  # GitHub link
         if link == '':
             continue
@@ -36,7 +36,6 @@ def enrich_papers_info():
 
         # Enrich the paper information with stars and PDF link
         paper['stars'] = stars
-        paper['stars'] = stars
         paper_with_code_list.append(paper)
 
     # Save the enriched paper list back to the JSON file
@@ -56,7 +55,7 @@ def write_papers_to_readme():
     with open('CVPR2023.md', 'w') as f:
         # Write the table headers
         f.write("# Top CVPR2023 Papers with Code \n")
-        f.write("|Title  | Homepage | Code | Code Stars |\n")
+        f.write("|Title  | Paper | Code | Github Stars |\n")
         f.write("| :---: | :---: | :---: | :---: |\n")
 
         for paper in sorted_paper_list:
@@ -66,11 +65,12 @@ def write_papers_to_readme():
                 username = parts[3]
                 repo_name = parts[4]
             show_stars = "![GitHub Repo stars](https://badgen.net/github/stars/{}/{})".format(username,repo_name)
-            f.write(f"| {paper['title']} | [Paper Link]({paper['home_page']}) | [Code Link]({paper['code']}) | {show_stars}|\n")
+            f.write(f"| {paper['title']} | [Link]]({paper['home_page']}) | [Github]({paper['code']}) | {show_stars}|\n")
 
     print('Converted enriched paper information to CVPR2023.md.')
 
-if not os.path.exists('papers_with_code_and_stars.json'):
+override = True
+if override or not os.path.exists('papers_with_code_and_stars.json') :
     enrich_papers_info()
 
 write_papers_to_readme()

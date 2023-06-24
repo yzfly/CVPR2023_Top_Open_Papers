@@ -33,6 +33,7 @@ def extract_thecvf_paper_info(html_file = "cvpr2023.html"):
         paper_info['arxiv'] = ""
         paper_info['bibtex'] = ""
         paper_info['code'] = ""
+        paper_info['authors'] = ""
 
         paper_title = paper.get_text(strip=True)
 
@@ -69,12 +70,11 @@ def enrich_paper_info(papers_info):
     soup = BeautifulSoup(response.text, 'html.parser')
 
     papers = soup.find_all('tr')  # Finding all table row tags
-    paper_list = []  # This will store all the paper information
 
     for paper in papers:
         title_link = paper.find('a')  # Finding the first 'a' tag inside the table row
 
-        if not title_link or not title_link['href'].startswith('https://github.com'):
+        if not title_link:
             continue  # Skip this row if there's no <a> tag or if the href doesn't start with 'https://github.com'
 
         title = link = authors = ''  # Initialize the variables
@@ -87,26 +87,23 @@ def enrich_paper_info(papers_info):
             authors = authors_div.text.strip().split('·')[0].strip()  # First author
 
         # Append the paper information to the list
+        paper_key = title_to_key(title)
         try:
-            paper_key = title_to_key(title)
-            paper_info = papers_info[paper_key]
-            paper_info['title'] = title
-            paper_info['authors'] = authors
-            paper_info['code'] = link
+            papers_info[paper_key]['title'] = title
+            papers_info[paper_key]['authors'] = authors
+            papers_info[paper_key]['code'] = link
         except:
-            paper_info = {}
-            paper_info['title'] = title
-            paper_info['authors'] = authors
-            paper_info['code'] = link
-            print(title)
+            continue
 
-        paper_list.append(paper_info)
-
-    return paper_list
+    return papers_info
 
 
 def main():
     thecvf_papers_info = extract_thecvf_paper_info()
+    """
+    with open('papers_thecvf_info.json', 'w') as f:
+        json.dump(thecvf_papers_info, f)
+    """
     paper_list = enrich_paper_info(thecvf_papers_info)
         # Save the paper list to a JSON file
     with open('papers_info.json', 'w') as f:
