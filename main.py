@@ -60,6 +60,8 @@ def write_papers_to_readme():
 
         for paper in sorted_paper_list:
             # Write the row to the file
+            if 'https://github.com/' not in paper['code']:
+                continue
             parts = paper['code'].split('/')
             if len(parts) > 4:  # Ensure the link points to a specific repository
                 username = parts[3]
