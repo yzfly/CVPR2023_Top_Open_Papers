@@ -3,7 +3,7 @@ import json
 import os
 
 github_api = 'https://api.github.com/repos'
-github_token = ''  # Replace with your GitHub token
+github_token = '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'  # Replace with your GitHub token
 
 def enrich_papers_info():
     # Load the paper list from the JSON file
@@ -54,7 +54,7 @@ def write_papers_to_readme():
 
     with open('CVPR2023.md', 'w') as f:
         # Write the table headers
-        f.write("# Top CVPR2023 Papers with Code \n")
+        #f.write("# Top CVPR2023 Papers with Code \n")
         f.write("|Title  | Paper | Code | Github Stars |\n")
         f.write("| :---: | :---: | :---: | :---: |\n")
 
