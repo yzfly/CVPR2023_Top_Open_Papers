@@ -52,9 +52,13 @@ def write_papers_to_readme():
     # Sort the list by stars
     sorted_paper_list = sorted(paper_list, key=lambda x: x['stars'], reverse=True)
 
-    with open('CVPR2023.md', 'w') as f:
+    with open('head.md', 'r') as source_file:
+        head_content = source_file.read()
+        
+    with open('README.md', 'w') as f:
         # Write the table headers
         #f.write("# Top CVPR2023 Papers with Code \n")
+        f.write(head_content)
         f.write("|Title  | Paper | Code | Github Stars |\n")
         f.write("| :---: | :---: | :---: | :---: |\n")
 
