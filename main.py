@@ -73,7 +73,7 @@ def write_papers_to_readme():
             show_stars = "![GitHub Repo stars](https://badgen.net/github/stars/{}/{})".format(username,repo_name)
             f.write(f"| {paper['title']} | [Link]({paper['home_page']}) | [Github]({paper['code']}) | {show_stars}|\n")
 
-    print('Converted enriched paper information to CVPR2023.md.')
+    print('Converted enriched paper information to README.md.')
 
 override = False
 if override or not os.path.exists('papers_with_code_and_stars.json') :
