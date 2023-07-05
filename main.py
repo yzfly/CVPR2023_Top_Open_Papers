@@ -3,7 +3,8 @@ import json
 import os
 
 github_api = 'https://api.github.com/repos'
-github_token = ''  # Replace with your GitHub token
+
+github_token = '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'  # Replace with your GitHub token
 
 def enrich_papers_info():
     # Load the paper list from the JSON file
